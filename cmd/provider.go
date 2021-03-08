@@ -7,7 +7,7 @@ import (
 )
 
 var providerCmd = &cobra.Command{
-	Use:   "provider [ethereum-url]",
+	Use:   "provider",
 	Short: "Displays the Ethereum provider",
 	Args:  cobra.ExactArgs(0),
 	Run: func(cmd *cobra.Command, args []string) {
