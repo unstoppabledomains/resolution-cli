@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"log"
 
+	"github.com/ethereum/go-ethereum/ethclient"
 	"github.com/mitchellh/go-homedir"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
@@ -32,18 +33,28 @@ func Execute() error {
 }
 
 func initCNS() {
-	var err error
-	CNS, err = resolution.NewCnsWithDefaultBackend()
-	if err != nil {
-		log.Fatal("Error connecting to provider: " + err.Error())
-		return
+	if provider == "" {
+		cns, err := resolution.NewCnsWithDefaultBackend()
+		if err != nil {
+			log.Fatal("Error connecting to provider: " + err.Error())
+		}
+		CNS = cns
+	} else {
+		backend, err := ethclient.Dial(provider)
+		if err != nil {
+			log.Fatalf("Failed to connect to the Ethereum client: %v", err)
+		}
+		CNS, err = resolution.NewCns(backend)
+		if err != nil {
+			log.Fatal("Error connecting to provider: " + err.Error())
+			return
+		}
 	}
 }
 
 func init() {
 	cobra.OnInitialize(initConfig)
 
-	// ryan <ryan@unstoppabledomains.com>, kiryl <kiryl@unstoppabledomains.com>, johnny <johnny@unstoppabledomains>")
 	rootCmd.PersistentFlags().StringVarP(&provider, "provider", "p", "", "Ethereum JSON RPC endpoint to retrieve records from")
 	viper.BindPFlag("provider", rootCmd.PersistentFlags().Lookup("provider"))
 	setProviderCmd.MarkPersistentFlagRequired("provider")
