@@ -18,6 +18,8 @@ var (
 	domain      string
 	// CNS Resolution instance
 	CNS *resolution.Cns
+	// ZNS Resolution instance
+	ZNS *resolution.Zns
 
 	rootCmd = &cobra.Command{
 		Use:   "resolution",
@@ -59,6 +61,7 @@ func init() {
 	viper.BindPFlag("provider", rootCmd.PersistentFlags().Lookup("provider"))
 	setProviderCmd.MarkPersistentFlagRequired("provider")
 	initCNS()
+	ZNS = resolution.NewZnsWithDefaultProvider()
 	resolveCmd.PersistentFlags().StringVarP(&domain, "domain", "d", "", "Domain to resolve")
 	resolveCmd.MarkPersistentFlagRequired("domain")
 	resolveCmd.AddCommand(addrCmd)
