@@ -15,7 +15,7 @@ limitations under the License.
 */
 package main
 
-import "resolution/resolution/cmd"
+import "github.com/unstoppabledomains/resolution-cli/resolution/cmd"
 
 func main() {
 	cmd.Execute()
