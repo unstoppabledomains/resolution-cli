@@ -10,8 +10,7 @@ import (
 
 var ipfsCmd = &cobra.Command{
 	Use:   "ipfs",
-	Short: "Resolve ipfs records of a domain",
-	Long:  "Resolve ipfs records of a domain",
+	Short: "Resolve ipfs records",
 	Args:  cobra.ExactArgs(0),
 	Run: func(cmd *cobra.Command, args []string) {
 		fmt.Printf("Resolving ipfs hash of %s\n", domain)

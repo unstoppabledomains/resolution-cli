@@ -54,15 +54,23 @@ func initCNS() {
 	}
 }
 
+func initZNS() {
+	ZNS = resolution.NewZnsWithDefaultProvider()
+}
+
 func init() {
+	log.SetFlags(log.Flags() &^ (log.Ldate | log.Ltime))
+
 	cobra.OnInitialize(initConfig)
 
-	rootCmd.PersistentFlags().StringVarP(&provider, "provider", "p", "", "Ethereum JSON RPC endpoint to retrieve records from")
+	rootCmd.PersistentFlags().StringVarP(&provider, "provider", "p", "", "Ethereum JSON RPC endpoint to retrieve records from. Overrides set-provider")
 	viper.BindPFlag("provider", rootCmd.PersistentFlags().Lookup("provider"))
 	setProviderCmd.MarkPersistentFlagRequired("provider")
+
 	initCNS()
-	ZNS = resolution.NewZnsWithDefaultProvider()
-	resolveCmd.PersistentFlags().StringVarP(&domain, "domain", "d", "", "Domain to resolve")
+	initZNS()
+
+	resolveCmd.PersistentFlags().StringVarP(&domain, "domain", "d", "", ".crypto or .zil domain to resolve")
 	resolveCmd.MarkPersistentFlagRequired("domain")
 	resolveCmd.AddCommand(addrCmd)
 	resolveCmd.AddCommand(ipfsCmd)

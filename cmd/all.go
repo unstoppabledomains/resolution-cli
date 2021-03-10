@@ -10,8 +10,7 @@ import (
 
 var allCmd = &cobra.Command{
 	Use:   "all",
-	Short: "Resolve all records of a domain",
-	Long:  "Resolve all records of a domain",
+	Short: "Resolve all records",
 	Args:  cobra.ExactArgs(0),
 	Run: func(cmd *cobra.Command, args []string) {
 		fmt.Printf("Resolving all records of %s...\n", domain)
