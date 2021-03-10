@@ -1,4 +1,4 @@
-module github.com/unstoppabledomains/resolution-cli
+module resolution
 
 go 1.16
 
