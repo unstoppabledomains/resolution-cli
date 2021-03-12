@@ -16,7 +16,7 @@ Simple CLI tool for resolving .crypto and .zil domains
 
 If no Ethereum JSON RPC provider is defined, a default Infura provider will be used
 
-The options for defining a provider are:
+Options for defining a provider:
 
 - `RESOLUTION_PROVIDER` env variable
 
