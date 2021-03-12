@@ -38,24 +38,24 @@ The CLI prioritizes the `--provider` flag
 
 #### Address
 
-Resolves single address from ticker symbol
+Resolve single address from ticker symbol
 
 `resolution resolve addr ETH -d brad.crypto`
 
 #### IPFS
 
-Resolves ipfs hash
+Resolve ipfs hash
 
 `resolution resolve ipfs -d brad.zil`
 
 #### All
 
-Resolves all records
+Resolve all records
 
 `resolution resolve records -d brad.zil`
 
 #### Records
 
-Resolves records from exact record keys. See supported records reference [here](https://docs.unstoppabledomains.com/domain-registry-essentials/records-reference)
+Resolve records from exact record keys. See supported records reference [here](https://docs.unstoppabledomains.com/domain-registry-essentials/records-reference)
 
 `resolution resolve records crypto.ETH.adddress crypto.BTC.address -d brad.crypto`
