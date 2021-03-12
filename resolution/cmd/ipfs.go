@@ -1,6 +1,7 @@
 package cmd
 
 import (
+	"encoding/json"
 	"fmt"
 	"log"
 	"strings"
@@ -13,7 +14,6 @@ var ipfsCmd = &cobra.Command{
 	Short: "Resolve ipfs records",
 	Args:  cobra.ExactArgs(0),
 	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Printf("Resolving ipfs hash of %s\n", domain)
 		var ipfsHash string
 		var err error
 		if strings.HasSuffix(domain, (".crypto")) {
@@ -24,8 +24,9 @@ var ipfsCmd = &cobra.Command{
 		if err != nil {
 			log.Fatal("Error connecting to provider: " + err.Error())
 		} else {
-			fmt.Printf("%s ipfs hash: %s\n", domain, ipfsHash)
+			b, _ := json.Marshal(map[string]string{"ipfs": ipfsHash})
 
+			fmt.Println(string(b))
 		}
 	},
 }

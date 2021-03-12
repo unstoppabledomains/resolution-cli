@@ -1,6 +1,7 @@
 package cmd
 
 import (
+	"encoding/json"
 	"fmt"
 	"log"
 	"strings"
@@ -13,7 +14,6 @@ var addrCmd = &cobra.Command{
 	Short: "Resolve address",
 	Args:  cobra.ExactArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Printf("Resolving %s address of %s...\n", args[0], domain)
 		var value string
 		var err error
 		if strings.HasSuffix(domain, (".crypto")) {
@@ -24,7 +24,8 @@ var addrCmd = &cobra.Command{
 		if err != nil {
 			log.Fatal("Error connecting to provider: " + err.Error())
 		} else {
-			fmt.Printf("%s %s address resolves to %s\n", domain, args[0], value)
+			b, _ := json.Marshal(map[string]string{args[0]: value})
+			fmt.Println(string(b))
 		}
 	},
 }

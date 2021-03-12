@@ -1,11 +1,9 @@
 package cmd
 
 import (
-	"fmt"
 	"log"
 
 	"github.com/ethereum/go-ethereum/ethclient"
-	"github.com/mitchellh/go-homedir"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
 	"github.com/unstoppabledomains/resolution-go"
@@ -84,20 +82,6 @@ func init() {
 }
 
 func initConfig() {
-	// Find home directory.
-	home, err := homedir.Dir()
-	cobra.CheckErr(err)
-
-	filename := "cobra"
-	viper.AddConfigPath(home)
-	viper.SetConfigName(filename)
-	viper.SetConfigType("yaml")
 	viper.AutomaticEnv()
-
-	if err := viper.ReadInConfig(); err != nil {
-		fmt.Println(err)
-		viper.WriteConfigAs(home + "/" + filename)
-	} else {
-		provider = viper.GetString("provider")
-	}
+	provider = viper.GetString("RESOLUTION_PROVIDER")
 }

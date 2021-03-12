@@ -1,6 +1,7 @@
 package cmd
 
 import (
+	"encoding/json"
 	"fmt"
 	"log"
 	"strings"
@@ -13,19 +14,19 @@ var recordsCmd = &cobra.Command{
 	Short: "Resolve list of records",
 	Args:  cobra.MinimumNArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Printf("Resolving records of %s\n", domain)
-
-		var values map[string]string
+		var records map[string]string
 		var err error
 		if strings.HasSuffix(domain, (".crypto")) {
-			values, err = CNS.Records(domain, args)
+			records, err = CNS.Records(domain, args)
 		} else {
-			values, err = ZNS.Records(domain, args)
+			records, err = ZNS.Records(domain, args)
 		}
 		if err != nil {
 			log.Fatal("Error connecting to provider: " + err.Error())
 		} else {
-			fmt.Printf("%s records: %s\n", domain, values)
+			b, _ := json.Marshal(records)
+			fmt.Println(string(b))
+
 		}
 	},
 }
