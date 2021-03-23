@@ -14,27 +14,29 @@ Simple CLI tool for resolving .crypto and .zil domains
 
 ## Ethereum Provider
 
-If no Ethereum JSON RPC provider is defined, a default Infura provider will be used
+If no Ethereum JSON RPC ethereum-provider-url is defined, a default Infura Ethereum Provider Url will be used
 
-Options for defining a provider:
+Options for defining a ethereumProviderUrlFlag:
 
-- `RESOLUTION_PROVIDER` env variable
+- `ETHEREUM_PROVIDER_URL` env variable
 
-- `--provider` flag
+- `--ethereum-provider-url` flag
 
-The CLI prioritizes the `--provider` flag
+The CLI prioritizes the `--ethereum-provider-url` flag
 
-## Flags
+## Zilliqa Provider
 
-`--provider` or `-p`
+If no Ethereum JSON RPC ethereum-provider-url is defined, a default Zilliqa mainnet Provider Url will be used
 
-- Provider to use
+Options for defining a ethereumProviderUrlFlag:
 
-`--domain` or `-d`
+- `ZILLIQA_PROVIDER_URL` env variable
 
-- Domain to use. This flag is required for the resolve command
+- `--zilliqa-provider-url` flag
 
-## Resolve a domain
+The CLI prioritizes the `--zilliqa-provider-url` flag
+
+## Resolve a Domain
 
 #### Address
 

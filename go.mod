@@ -18,7 +18,6 @@ require (
 	github.com/kr/text v0.2.0 // indirect
 	github.com/magiconair/properties v1.8.4 // indirect
 	github.com/mattn/go-runewidth v0.0.10 // indirect
-	github.com/mitchellh/go-homedir v1.1.0
 	github.com/mitchellh/mapstructure v1.4.1 // indirect
 	github.com/olekukonko/tablewriter v0.0.5 // indirect
 	github.com/pelletier/go-toml v1.8.1 // indirect
@@ -33,10 +32,11 @@ require (
 	github.com/spf13/cobra v1.1.3
 	github.com/spf13/jwalterweatherman v1.1.0 // indirect
 	github.com/spf13/viper v1.7.1
+	github.com/Zilliqa/gozilliqa-sdk v1.2.0
 	github.com/status-im/keycard-go v0.0.0-20200402102358-957c09536969 // indirect
 	github.com/tklauser/go-sysconf v0.3.4 // indirect
 	github.com/tyler-smith/go-bip39 v1.1.0 // indirect
-	github.com/unstoppabledomains/resolution-go v0.0.0-20210305180336-485df6b3bbae
+	github.com/unstoppabledomains/resolution-go v1.0.0
 	golang.org/x/crypto v0.0.0-20210220033148-5ea612d1eb83 // indirect
 	golang.org/x/net v0.0.0-20210226172049-e18ecbb05110 // indirect
 	golang.org/x/sync v0.0.0-20210220032951-036812b2e83c // indirect

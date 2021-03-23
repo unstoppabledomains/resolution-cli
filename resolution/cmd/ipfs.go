@@ -1,12 +1,8 @@
 package cmd
 
 import (
-	"encoding/json"
-	"fmt"
-	"log"
-	"strings"
-
 	"github.com/spf13/cobra"
+	"log"
 )
 
 var ipfsCmd = &cobra.Command{
@@ -14,19 +10,10 @@ var ipfsCmd = &cobra.Command{
 	Short: "Resolve ipfs records",
 	Args:  cobra.ExactArgs(0),
 	Run: func(cmd *cobra.Command, args []string) {
-		var ipfsHash string
 		var err error
-		if strings.HasSuffix(domain, (".crypto")) {
-			ipfsHash, err = CNS.IpfsHash(domain)
-		} else {
-			ipfsHash, err = ZNS.IpfsHash(domain)
-		}
+		ReturnedValue, err = SelectedNamingService.IpfsHash(Domain)
 		if err != nil {
-			log.Fatal("Error connecting to provider: " + err.Error())
-		} else {
-			b, _ := json.Marshal(map[string]string{"ipfs": ipfsHash})
-
-			fmt.Println(string(b))
+			log.Fatal(err)
 		}
 	},
 }
