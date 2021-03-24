@@ -6,12 +6,13 @@ import (
 )
 
 var addrCmd = &cobra.Command{
-	Use:   "addr [address]",
-	Short: "Resolve address",
-	Args:  cobra.ExactArgs(1),
+	Use:     "addr CURRENCY_TICKER",
+	Example: "resolution resolve addr ETH -d brad.crypto",
+	Short:   "Resolve address",
+	Args:    cobra.ExactArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
 		var err error
-		ReturnedValue, err = SelectedNamingService.Addr(Domain, args[1])
+		ReturnedValue, err = SelectedNamingService.Addr(Domain, args[0])
 		if err != nil {
 			log.Fatal(err)
 		}

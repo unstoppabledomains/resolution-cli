@@ -36,17 +36,14 @@ func Execute() error {
 func init() {
 	cobra.OnInitialize(initConfig)
 	log.SetFlags(log.Flags() &^ (log.Ldate | log.Ltime))
-	rootCmd.PersistentFlags().StringVar(&ethereumProviderUrlFlag, "ethereum-provider-url", "", "Ethereum JSON RPC endpoint url")
-	rootCmd.PersistentFlags().StringVar(&zilliqaProviderUrlFlag, "zilliqa-provider-url", "", "Zilliqa JSON RPC endpoint url")
+	rootCmd.PersistentFlags().StringVar(&ethereumProviderUrlFlag, "ethereum-provider-url", "", "Ethereum JSON RPC endpoint url (could be set via RESOLUTION_ETHEREUM_PROVIDER_URL environment variable)")
+	rootCmd.PersistentFlags().StringVar(&zilliqaProviderUrlFlag, "zilliqa-provider-url", "", "Zilliqa JSON RPC endpoint url (could be set via RESOLUTION_ZILLIQA_PROVIDER_URL environment variable)")
 	resolveCmd.PersistentFlags().StringVarP(&Domain, "domain", "d", "", ".crypto or .zil domain to resolve (required)")
 	err := resolveCmd.MarkPersistentFlagRequired("domain")
 	if err != nil {
 		log.Fatal(err)
 	}
-	resolveCmd.AddCommand(addrCmd)
-	resolveCmd.AddCommand(ipfsCmd)
-	resolveCmd.AddCommand(recordsCmd)
-	resolveCmd.AddCommand(allCmd)
+	resolveCmd.AddCommand(addrCmd, ipfsCmd, recordsCmd, httpUrlCmd, ownerCmd, resolverCmd, emailCmd, dnsCmd, addrVersionCmd)
 	rootCmd.AddCommand(resolveCmd)
 }
 

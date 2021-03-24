@@ -17,3 +17,7 @@ func formatOutput(v interface{}) (string, error) {
 	}
 	return outputBuilder.String(), nil
 }
+
+func prepareMultiRecordsOutput(v interface{}) map[string]interface{} {
+	return map[string]interface{}{"records": v}
+}

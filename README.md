@@ -48,13 +48,13 @@ Resolve single address from ticker symbol
 
 Resolve ipfs hash
 
-`resolution resolve ipfs -d brad.zil`
+`resolution resolve ipfs-hash -d brad.zil`
 
 #### All
 
-Resolve all records
+Resolve all known records
 
-`resolution resolve records -d brad.zil`
+`resolution resolve -d brad.zil`
 
 #### Records
 
