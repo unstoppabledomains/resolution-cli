@@ -1,32 +1,26 @@
 package cmd
 
 import (
-	"encoding/json"
-	"fmt"
-	"log"
-	"strings"
-
 	"github.com/spf13/cobra"
+	"log"
 )
 
 var recordsCmd = &cobra.Command{
-	Use:   "records [records]",
+	Use:   "records RECORD_KEY_1 RECORD_KEY_2...",
 	Short: "Resolve list of records",
-	Args:  cobra.MinimumNArgs(1),
+	Long: `
+Resolve the list of records. 
+Find details about available records and records format in records reference guide: 
+https://docs.unstoppabledomains.com/domain-registry-essentials/records-reference
+`,
+	Example: "resolution resolve records crypto.ETH.address crypto.BTC.address -d brad.crypto",
+	Args:    cobra.MinimumNArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
-		var records map[string]string
 		var err error
-		if strings.HasSuffix(domain, (".crypto")) {
-			records, err = CNS.Records(domain, args)
-		} else {
-			records, err = ZNS.Records(domain, args)
-		}
+		ReturnedValue, err = SelectedNamingService.Records(Domain, args)
 		if err != nil {
-			log.Fatal("Error connecting to provider: " + err.Error())
-		} else {
-			b, _ := json.Marshal(records)
-			fmt.Println(string(b))
-
+			log.Fatal(err)
 		}
+		ReturnedValue = prepareMultiRecordsOutput(ReturnedValue)
 	},
 }

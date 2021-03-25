@@ -1,19 +1,22 @@
 package cmd
 
 import (
-	"log"
-	"strings"
-
 	"github.com/spf13/cobra"
+	"log"
 )
 
 var resolveCmd = &cobra.Command{
-	Use:   "resolve",
-	Short: "Resolve record(s) of domain",
-	Long:  "Resolve record(s) of a domain. Domain must be specified",
-	PersistentPreRun: func(cmd *cobra.Command, args []string) {
-		if !strings.HasSuffix(domain, (".crypto")) && !strings.HasSuffix(domain, (".zil")) {
-			log.Fatal("Domain must end with .crypto or .zil")
+	Use:     "resolve",
+	Short:   "Resolve all known records of domain",
+	Long:    "Resolve all known records of domain. Domain must be specified",
+	Example: "resolution resolve -d brad.crypto",
+	Args:    cobra.ExactArgs(0),
+	Run: func(cmd *cobra.Command, args []string) {
+		var err error
+		ReturnedValue, err = SelectedNamingService.AllRecords(Domain)
+		if err != nil {
+			log.Fatal(err)
 		}
+		ReturnedValue = prepareMultiRecordsOutput(ReturnedValue)
 	},
 }
