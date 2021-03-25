@@ -133,7 +133,7 @@ func TestCliZilResolve(t *testing.T) {
 	t.Parallel()
 	cmd := testcli.Command(commandPath(), "resolve", "-d", "brad.zil")
 	cmd.Run()
-	expectedOutput := `{
+	expectedOutput := `   {
    "records": {
       "crypto.BCH.address": "qrq4sk49ayvepqz7j7ep8x4km2qp8lauvcnzhveyu6",
       "crypto.BTC.address": "1EVt92qQnaLDcmVFtHivRJaunG2mf2C3mB",
