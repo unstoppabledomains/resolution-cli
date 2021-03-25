@@ -1,6 +1,6 @@
 # resolution-cli
-![Test](https://github.com/unstoppabledomains/resolution-cli/workflows/e2e-test.yml/badge.svg?branch=master)
-![Lint](https://github.com/unstoppabledomains/resolution-cli/workflows/lint.yml/badge.svg?branch=master)
+![Test](https://github.com/unstoppabledomains/resolution-cli/actions/workflows/e2e-test.yml/badge.svg?branch=master)
+![Lint](https://github.com/unstoppabledomains/resolution-cli/actions/workflows/lint.yml/badge.svg?branch=master)
 [![Go Report Card](https://goreportcard.com/badge/github.com/unstoppabledomains/resolution-cli)](https://goreportcard.com/report/github.com/unstoppabledomains/resolution-cli)
 [![GoDoc](https://godoc.org/github.com/unstoppabledomains/resolution-cli?status.svg)](https://pkg.go.dev/github.com/unstoppabledomains/resolution-cli)
 [![Unstoppable Domains Documentation](https://img.shields.io/badge/docs-unstoppabledomains.com-blue)](https://docs.unstoppabledomains.com/)
