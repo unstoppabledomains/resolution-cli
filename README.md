@@ -61,3 +61,10 @@ Resolve all known records
 Resolve records from exact record keys. See supported records reference [here](https://docs.unstoppabledomains.com/domain-registry-essentials/records-reference)
 
 `resolution resolve records crypto.ETH.adddress crypto.BTC.address -d brad.crypto`
+
+## Development
+
+### Run end-to-end tests
+```shell
+$ bash run-e2e-test.sh
+```

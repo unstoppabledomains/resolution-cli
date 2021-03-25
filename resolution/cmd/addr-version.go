@@ -10,7 +10,7 @@ var version string
 
 var addrVersionCmd = &cobra.Command{
 	Use:     "addr-version -v TICKER_VERSION -c TICKER",
-	Example: "resolution resolve addr-version -t USDT -v ERC20 -d udtestdev-usdt.crypto",
+	Example: "resolution resolve addr-version -c USDT -v ERC20 -d udtestdev-usdt.crypto",
 	Short:   "Resolve multi-chain address",
 	Long: `
 Some cryptocurrencies exists in multiple chains. 
@@ -29,6 +29,6 @@ https://docs.unstoppabledomains.com/domain-registry-essentials/records-reference
 }
 
 func init() {
-	addrVersionCmd.Flags().StringVarP(&ticker, "ticker", "t", "", "Multi-chain currency ticker (required)")
+	addrVersionCmd.Flags().StringVarP(&ticker, "currency", "c", "", "Multi-chain currency ticker (required)")
 	addrVersionCmd.Flags().StringVarP(&version, "version", "v", "", "Multi-chain currency version (required)")
 }
