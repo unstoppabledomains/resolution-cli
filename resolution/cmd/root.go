@@ -1,6 +1,7 @@
 package cmd
 
 import (
+	"fmt"
 	"github.com/Zilliqa/gozilliqa-sdk/provider"
 	"github.com/ethereum/go-ethereum/ethclient"
 	"github.com/unstoppabledomains/resolution-go"
@@ -16,6 +17,8 @@ const zilliqaUrlKey = "ZILLIQA_PROVIDER_URL"
 
 var Domain string
 var NamingServices map[string]resolution.NamingService
+var ReturnedValue interface{}
+var SelectedNamingService resolution.NamingService
 
 var ethereumProviderUrlFlag string
 var zilliqaProviderUrlFlag string
@@ -26,6 +29,27 @@ var (
 		Short: "Resolution is a simple blockchain Domain resolution tool",
 		Long: `A simple blockchain Domain resolution cli tool built by the Unstoppable Domains team. 
 Complete documentation is available at http://docs.unstoppabledomains.com`,
+		PersistentPreRun: func(cmd *cobra.Command, args []string) {
+			if Domain == "" {
+				return
+			}
+			var err error
+			namingServiceName, err := resolution.DetectNamingService(Domain)
+			if err != nil {
+				log.Fatal(err)
+			}
+			if NamingServices[namingServiceName] == nil {
+				log.Fatalf("Naming service %v does not exist in initialized naming services. Supported services are: %v, %v", namingServiceName, namingservice.CNS, namingservice.ZNS)
+			}
+			SelectedNamingService = NamingServices[namingServiceName]
+		},
+		PersistentPostRun: func(cmd *cobra.Command, args []string) {
+			output, err := formatOutput(ReturnedValue)
+			if err != nil {
+				log.Fatal(err)
+			}
+			fmt.Println(output)
+		},
 	}
 )
 

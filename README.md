@@ -62,6 +62,9 @@ Resolve records from exact record keys. See supported records reference [here](h
 
 `resolution resolve records crypto.ETH.adddress crypto.BTC.address -d brad.crypto`
 
+## Output format
+CLI provides valid JSON output or quoted string in case of single return value
+
 ## Development
 
 ### Run end-to-end tests
