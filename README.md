@@ -22,7 +22,7 @@ resolution-cli supports decentralized domains across three zones:
 # Quick Start
 
 ## Download binaries from release pages
-Go the releases page and download binary for specified platform
+[Find binary on releases page](https://github.com/unstoppabledomains/resolution-cli/releases)
 
 ## Installation using go
 
