@@ -25,8 +25,9 @@ var zilliqaProviderUrlFlag string
 
 var (
 	rootCmd = &cobra.Command{
-		Use:   "resolution",
-		Short: "Resolution is a simple blockchain Domain resolution tool",
+		Version: "v1.0.0",
+		Use:     "resolution",
+		Short:   "Resolution is a simple blockchain Domain resolution tool",
 		Long: `A simple blockchain Domain resolution cli tool built by the Unstoppable Domains team. 
 Complete documentation is available at http://docs.unstoppabledomains.com`,
 		PersistentPreRun: func(cmd *cobra.Command, args []string) {

@@ -120,7 +120,9 @@ $ bash run-e2e-test.sh
 ```shell
 $ bash build-binaries.sh
 ```
-Find the binaries in `./build` directory  
+Find the binaries in `./build` directory
+
+**Note: Each new release should include these binaries attached**
 
 # Free advertising for integrated apps
 

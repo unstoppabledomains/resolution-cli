@@ -16,6 +16,7 @@ do
     fi
 
     env GOOS=$GOOS GOARCH=$GOARCH go build -o $output_name './'$package_name
+    zip -j -m -D $output_name'.zip' $output_name
     if [ $? -ne 0 ]; then
         echo 'An error has occurred! Aborting the script execution...'
         exit 1
