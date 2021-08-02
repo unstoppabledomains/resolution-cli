@@ -1,9 +1,10 @@
 package cmd
 
 import (
+	"log"
+
 	"github.com/spf13/cobra"
 	"github.com/unstoppabledomains/resolution-go/dnsrecords"
-	"log"
 )
 
 var dnsCmd = &cobra.Command{

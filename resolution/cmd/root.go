@@ -2,11 +2,12 @@ package cmd
 
 import (
 	"fmt"
+	"log"
+
 	"github.com/Zilliqa/gozilliqa-sdk/provider"
 	"github.com/ethereum/go-ethereum/ethclient"
 	"github.com/unstoppabledomains/resolution-go"
 	"github.com/unstoppabledomains/resolution-go/namingservice"
-	"log"
 
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
@@ -25,7 +26,7 @@ var zilliqaProviderUrlFlag string
 
 var (
 	rootCmd = &cobra.Command{
-		Version: "v1.0.0",
+		Version: "v1.1.0",
 		Use:     "resolution",
 		Short:   "Resolution is a simple blockchain Domain resolution tool",
 		Long: `A simple blockchain Domain resolution cli tool built by the Unstoppable Domains team. 
@@ -40,7 +41,7 @@ Complete documentation is available at http://docs.unstoppabledomains.com`,
 				log.Fatal(err)
 			}
 			if NamingServices[namingServiceName] == nil {
-				log.Fatalf("Naming service %v does not exist in initialized naming services. Supported services are: %v, %v", namingServiceName, namingservice.CNS, namingservice.ZNS)
+				log.Fatalf("Naming service %v does not exist in initialized naming services. Supported services are: %v, %v", namingServiceName, namingservice.UNS, namingservice.ZNS)
 			}
 			SelectedNamingService = NamingServices[namingServiceName]
 		},
@@ -88,18 +89,18 @@ func initNamingServices() {
 	var err error
 	ethereumUrl := viper.GetString(ethereumUrlKey)
 	zilliqaUrl := viper.GetString(zilliqaUrlKey)
-	cnsBuilder := resolution.NewCnsBuilder()
+	unsBuilder := resolution.NewUnsBuilder()
 	znsBuilder := resolution.NewZnsBuilder()
 	if ethereumUrl != "" {
 		backend, err := ethclient.Dial(ethereumUrl)
 		if err != nil {
 			log.Fatalf("Error connecting to Ethereum provider. Provider: %v. Error: %v", ethereumUrl, err.Error())
 		}
-		cnsBuilder.SetContractBackend(backend)
+		unsBuilder.SetContractBackend(backend)
 	}
-	cnsService, err := cnsBuilder.Build()
+	unsService, err := unsBuilder.Build(false)
 	if err != nil {
-		log.Fatalf("Error with initiation CNS naming service. Provider: %v. Error: %v", ethereumUrl, err.Error())
+		log.Fatalf("Error with initiation UNS naming service. Provider: %v. Error: %v", ethereumUrl, err.Error())
 	}
 	if zilliqaUrl != "" {
 		zilliqaProvider := provider.NewProvider(zilliqaUrl)
@@ -109,5 +110,5 @@ func initNamingServices() {
 	if err != nil {
 		log.Fatalf("Error with initiation ZNS naming service. Provider: %v. Error: %v", zilliqaUrl, err.Error())
 	}
-	NamingServices = map[string]resolution.NamingService{namingservice.CNS: cnsService, namingservice.ZNS: znsService}
+	NamingServices = map[string]resolution.NamingService{namingservice.UNS: unsService, namingservice.ZNS: znsService}
 }

@@ -24,8 +24,9 @@ SOFTWARE.
 package main
 
 import (
-	"github.com/unstoppabledomains/resolution-cli/resolution/cmd"
 	"log"
+
+	"github.com/unstoppabledomains/resolution-cli/resolution/cmd"
 )
 
 func main() {
