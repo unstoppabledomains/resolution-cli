@@ -30,7 +30,7 @@ func TestCliResolve(t *testing.T) {
       "crypto.ETH.address": "0x8aaD44321A86b170879d7A244c1e8d360c99DdA8",
       "gundb.public_key.value": "pqeBHabDQdCHhbdivgNEc74QO-x8CPGXq4PKWgfIzhY.7WJR5cZFuSyh1bFwx0GWzjmrim0T5Y6Bp0SSK0im3nI",
       "gundb.username.value": "0x8912623832e174f2eb1f59cc3b587444d619376ad5bf10070e937e0dc22b9ffb2e3ae059e6ebf729f87746b2f71e5d88ec99c1fb3c7c49b8617e2520d474c48e1c",
-      "ipfs.html.value": "QmT6tFn2kk5oCUprChNNpAfCcfJJwQTgMnBbjsvgWVPYiS",
+      "ipfs.html.value": "QmdyBw5oTgCtTLQ18PbDvPL8iaLoEPhSyzD91q9XmgmAjb",
       "ipfs.redirect_domain.value": "https://abbfe6z95qov3d40hf6j30g7auo7afhp.mypinata.cloud/ipfs/Qme54oEzRkgooJbCDr78vzKAWcv6DDEZqRhhDyDtzgrZP6"
    }
 }
@@ -93,7 +93,7 @@ func TestCliIpfsHash(t *testing.T) {
 	t.Parallel()
 	cmd := testcli.Command(commandPath(), "resolve", "ipfs-hash", "-d", "brad.crypto")
 	cmd.Run()
-	expectedOutput := `"QmT6tFn2kk5oCUprChNNpAfCcfJJwQTgMnBbjsvgWVPYiS"
+	expectedOutput := `"QmdyBw5oTgCtTLQ18PbDvPL8iaLoEPhSyzD91q9XmgmAjb"
 `
 	assertCommandResult(t, cmd, expectedOutput)
 }
