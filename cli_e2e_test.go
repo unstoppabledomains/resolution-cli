@@ -1,11 +1,12 @@
 package resolution_cli
 
 import (
-	"github.com/rendon/testcli"
-	"github.com/stretchr/testify/assert"
 	"os"
 	"path"
 	"testing"
+
+	"github.com/rendon/testcli"
+	"github.com/stretchr/testify/assert"
 )
 
 func commandPath() string {

@@ -98,7 +98,7 @@ func initNamingServices() {
 		}
 		unsBuilder.SetContractBackend(backend)
 	}
-	unsService, err := unsBuilder.Build(false)
+	unsService, err := unsBuilder.Build()
 	if err != nil {
 		log.Fatalf("Error with initiation UNS naming service. Provider: %v. Error: %v", ethereumUrl, err.Error())
 	}
