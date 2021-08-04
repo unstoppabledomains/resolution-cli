@@ -1,4 +1,5 @@
 # resolution-cli
+
 ![Test](https://github.com/unstoppabledomains/resolution-cli/actions/workflows/e2e-test.yml/badge.svg?branch=master)
 ![Lint](https://github.com/unstoppabledomains/resolution-cli/actions/workflows/lint.yml/badge.svg?branch=master)
 [![Go Report Card](https://goreportcard.com/badge/github.com/unstoppabledomains/resolution-cli)](https://goreportcard.com/report/github.com/unstoppabledomains/resolution-cli)
@@ -6,7 +7,7 @@
 [![Unstoppable Domains Documentation](https://img.shields.io/badge/docs-unstoppabledomains.com-blue)](https://docs.unstoppabledomains.com/)
 [![Get help on Discord](https://img.shields.io/badge/Get%20help%20on-Discord-blueviolet)](https://discord.gg/b6ZVxSZ9Hn)
 
-Simple CLI tool for resolving .crypto and .zil domains
+Simple CLI tool for resolving Unstoppable domains
 
 resolution-cli is a tool for interacting with blockchain domain names. It can be used to retrieve [payment addresses](https://unstoppabledomains.com/features#Add-Crypto-Addresses), IPFS hashes for [decentralized websites](https://unstoppabledomains.com/features#Build-Website), DNS records and other [records types](https://docs.unstoppabledomains.com/domain-registry-essentials/records-reference)
 
@@ -14,14 +15,22 @@ resolution-cli is primarily built and maintained by [Unstoppable Domains](https:
 
 resolution-cli supports decentralized domains across three zones:
 
-- Crypto Name Service (CNS)
-    - `.crypto`
+- Crypto Name Service (UNS)
+  - `.crypto`
+  - `.coin`
+  - `.wallet`
+  - `.bitcoin`
+  - `.x`
+  - `.888`
+  - `.nft`
+  - `.dao`
 - Zilliqa Name Service (ZNS)
-    - `.zil`
+  - `.zil`
 
 # Quick Start
 
 ## Download binaries from release pages
+
 [Find binary on releases page](https://github.com/unstoppabledomains/resolution-cli/releases)
 
 ## Installation using go
@@ -31,6 +40,7 @@ $ go get -u github.com/unstoppabledomains/resolution-cli/resolution
 ```
 
 ### Build and install from sources
+
 ```shell
 $ go build -o ./cli ./resolution
 $ mv ./cli /usr/local/bin/resolution
@@ -101,25 +111,31 @@ $ resolution resolve records crypto.ETH.adddress crypto.BTC.address -d brad.cryp
 ```
 
 # Output format
+
 CLI provides JSON output or quoted string in case of single return value
 
 # Network support
+
 CLI supports Ethereum mainnet and Zilliqa mainnet only.
 
 # Contributions
+
 Contributions are more than welcome. The easiest way to contribute is through GitHub issues and pull requests.
 
 # Development
 
 ## Run end-to-end tests
+
 ```shell
 $ bash run-e2e-test.sh
 ```
 
 ## Build binaries for Windows, MacOS and Linux
+
 ```shell
 $ bash build-binaries.sh
 ```
+
 Find the binaries in `./build` directory
 
 **Note: Each new release should include these binaries attached**
@@ -131,4 +147,5 @@ Once your app has a working Unstoppable Domains integration, [register it here](
 Also, every week we select a newly-integrated app to feature in the Unstoppable Update newsletter. This newsletter is delivered to straight into the inbox of ~100,000 crypto fanatics — all of whom could be new customers to grow your business.
 
 # Get help
-[Join our discord community](https://discord.com/invite/b6ZVxSZ9Hn) and ask questions.  
+
+[Join our discord community](https://discord.com/invite/b6ZVxSZ9Hn) and ask questions.

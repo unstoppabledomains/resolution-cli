@@ -1,8 +1,9 @@
 package cmd
 
 import (
-	"github.com/spf13/cobra"
 	"log"
+
+	"github.com/spf13/cobra"
 )
 
 var addrCmd = &cobra.Command{
@@ -16,5 +17,4 @@ var addrCmd = &cobra.Command{
 		if err != nil {
 			log.Fatal(err)
 		}
-	},
-}
+	}}
