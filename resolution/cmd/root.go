@@ -17,6 +17,7 @@ const ethereumUrlKey = "ETHEREUM_PROVIDER_URL"
 const zilliqaUrlKey = "ZILLIQA_PROVIDER_URL"
 
 var Domain string
+var Decimal bool
 var NamingServices map[string]resolution.NamingService
 var ReturnedValue interface{}
 var SelectedNamingService resolution.NamingService
@@ -66,6 +67,7 @@ func init() {
 	rootCmd.PersistentFlags().StringVar(&zilliqaProviderUrlFlag, "zilliqa-provider-url", "", "Zilliqa JSON RPC endpoint url (could be set via RESOLUTION_ZILLIQA_PROVIDER_URL environment variable)")
 	resolveCmd.PersistentFlags().StringVarP(&Domain, "domain", "d", "", ".crypto or .zil domain to resolve (required)")
 	namehashCmd.PersistentFlags().StringVarP(&Domain, "domain", "d", "", ".crypto or .zil domain to resolve (required)")
+	namehashCmd.PersistentFlags().BoolVar(&Decimal, "decimal", false, "return namehash as decimal")
 	err := resolveCmd.MarkPersistentFlagRequired("domain")
 	if err != nil {
 		log.Fatal(err)

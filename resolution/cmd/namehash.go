@@ -2,6 +2,8 @@ package cmd
 
 import (
 	"log"
+	"math/big"
+	"strings"
 
 	"github.com/spf13/cobra"
 )
@@ -13,8 +15,15 @@ var namehashCmd = &cobra.Command{
 	Args:    cobra.ExactArgs(0),
 	Run: func(cmd *cobra.Command, args []string) {
 		var err error
-		ReturnedValue, err = SelectedNamingService.Namehash(Domain)
+
+		namehash, err := SelectedNamingService.Namehash(Domain)
 		if err != nil {
 			log.Fatal(err)
+		}
+		ReturnedValue = namehash
+		if Decimal {
+			tokenId := new(big.Int)
+			tokenId.SetString(strings.Replace(namehash, "0x", "", -1), 16)
+			ReturnedValue = tokenId
 		}
 	}}
