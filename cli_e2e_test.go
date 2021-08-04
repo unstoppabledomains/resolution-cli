@@ -37,6 +37,15 @@ func TestCliUnsNamehash(t *testing.T) {
 	assertCommandResult(t, cmd, expectedOutput)
 }
 
+func TestCliUnsNamehashDecimal(t *testing.T) {
+	t.Parallel()
+	cmd := testcli.Command(commandPath(), "namehash", "-d", "brad.crypto", "--decimal")
+	cmd.Run()
+	expectedOutput := `53115498937382692782103703677178119840631903773202805882273058578308100329417
+`
+	assertCommandResult(t, cmd, expectedOutput)
+}
+
 func TestCliCnsResolve(t *testing.T) {
 	t.Parallel()
 	cmd := testcli.Command(commandPath(), "resolve", "-d", "brad.crypto")
