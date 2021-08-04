@@ -20,6 +20,23 @@ func assertCommandResult(t *testing.T, cmd *testcli.Cmd, expectedOutput string) 
 	assert.Empty(t, cmd.Stderr())
 }
 
+func TestCliZnsNamehash(t *testing.T) {
+	t.Parallel()
+	cmd := testcli.Command(commandPath(), "namehash", "-d", "brad.zil")
+	cmd.Run()
+	expectedOutput := `"0x5fc604da00f502da70bfbc618088c0ce468ec9d18d05540935ae4118e8f50787"
+`
+	assertCommandResult(t, cmd, expectedOutput)
+}
+func TestCliUnsNamehash(t *testing.T) {
+	t.Parallel()
+	cmd := testcli.Command(commandPath(), "namehash", "-d", "brad.crypto")
+	cmd.Run()
+	expectedOutput := `"0x756e4e998dbffd803c21d23b06cd855cdc7a4b57706c95964a37e24b47c10fc9"
+`
+	assertCommandResult(t, cmd, expectedOutput)
+}
+
 func TestCliCnsResolve(t *testing.T) {
 	t.Parallel()
 	cmd := testcli.Command(commandPath(), "resolve", "-d", "brad.crypto")
