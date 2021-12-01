@@ -13,7 +13,7 @@ resolution-cli is a tool for interacting with blockchain domain names. It can be
 
 resolution-cli is primarily built and maintained by [Unstoppable Domains](https://unstoppabledomains.com/).
 
-resolution-cli supports decentralized domains across three zones:
+resolution-cli supports decentralized domains across two zones:
 
 - Crypto Name Service (UNS)
   - `.crypto`
