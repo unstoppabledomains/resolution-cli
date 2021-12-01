@@ -54,6 +54,10 @@ $ resolution --help
 
 ### Ethereum Provider
 
+UNS domains are resolved by reading from both the Ethereum mainnet and Polygon L2 network
+
+#### L1
+
 If no Ethereum JSON RPC ethereum-provider-url is defined, a default Infura Ethereum Provider Url will be used
 
 Options for defining a ethereumProviderUrlFlag:
@@ -63,6 +67,18 @@ Options for defining a ethereumProviderUrlFlag:
 - `--ethereum-provider-url` flag
 
 The CLI prioritizes the `--ethereum-provider-url` flag
+
+#### L2
+
+If no Ethereum L2 JSON RPC ethereum-provider-url is defined, a default Infura Ethereum L2 Provider Url will be used
+
+Options for defining a ethereumL2ProviderUrlFlag:
+
+- `ETHEREUM_L2_PROVIDER_URL` env variable
+
+- `--ethereum-l2-provider-url` flag
+
+The CLI prioritizes the `--ethereum-l2-provider-url` flag
 
 ### Zilliqa Provider
 

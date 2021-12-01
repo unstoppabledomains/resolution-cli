@@ -6,14 +6,15 @@ import (
 
 	"github.com/Zilliqa/gozilliqa-sdk/provider"
 	"github.com/ethereum/go-ethereum/ethclient"
-	"github.com/unstoppabledomains/resolution-go"
-	"github.com/unstoppabledomains/resolution-go/namingservice"
+	"github.com/unstoppabledomains/resolution-go/v2"
+	"github.com/unstoppabledomains/resolution-go/v2/namingservice"
 
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
 )
 
 const ethereumUrlKey = "ETHEREUM_PROVIDER_URL"
+const ethereumL2UrlKey = "ETHEREUM_L2_PROVIDER_URL"
 const zilliqaUrlKey = "ZILLIQA_PROVIDER_URL"
 
 var Domain string
@@ -23,6 +24,7 @@ var ReturnedValue interface{}
 var SelectedNamingService resolution.NamingService
 
 var ethereumProviderUrlFlag string
+var ethereumL2ProviderUrlFlag string
 var zilliqaProviderUrlFlag string
 
 var (
@@ -64,6 +66,7 @@ func init() {
 	cobra.OnInitialize(initConfig)
 	log.SetFlags(log.Flags() &^ (log.Ldate | log.Ltime))
 	rootCmd.PersistentFlags().StringVar(&ethereumProviderUrlFlag, "ethereum-provider-url", "", "Ethereum JSON RPC endpoint url (could be set via RESOLUTION_ETHEREUM_PROVIDER_URL environment variable)")
+	rootCmd.PersistentFlags().StringVar(&ethereumL2ProviderUrlFlag, "ethereum-l2-provider-url", "", "Ethereum L2 JSON RPC endpoint url (could be set via RESOLUTION_ETHEREUM_L2_PROVIDER_URL environment variable)")
 	rootCmd.PersistentFlags().StringVar(&zilliqaProviderUrlFlag, "zilliqa-provider-url", "", "Zilliqa JSON RPC endpoint url (could be set via RESOLUTION_ZILLIQA_PROVIDER_URL environment variable)")
 	resolveCmd.PersistentFlags().StringVarP(&Domain, "domain", "d", "", ".crypto or .zil domain to resolve (required)")
 	namehashCmd.PersistentFlags().StringVarP(&Domain, "domain", "d", "", ".crypto or .zil domain to resolve (required)")
@@ -87,6 +90,9 @@ func initConfig() {
 	if ethereumProviderUrlFlag != "" {
 		viper.Set(ethereumUrlKey, ethereumProviderUrlFlag)
 	}
+	if ethereumL2ProviderUrlFlag != "" {
+		viper.Set(ethereumL2UrlKey, ethereumL2ProviderUrlFlag)
+	}
 	if zilliqaProviderUrlFlag != "" {
 		viper.Set(zilliqaUrlKey, zilliqaProviderUrlFlag)
 	}
@@ -96,6 +102,7 @@ func initConfig() {
 func initNamingServices() {
 	var err error
 	ethereumUrl := viper.GetString(ethereumUrlKey)
+	ethereumL2Url := viper.GetString(ethereumL2ProviderUrlFlag)
 	zilliqaUrl := viper.GetString(zilliqaUrlKey)
 	unsBuilder := resolution.NewUnsBuilder()
 	znsBuilder := resolution.NewZnsBuilder()
@@ -105,6 +112,17 @@ func initNamingServices() {
 			log.Fatalf("Error connecting to Ethereum provider. Provider: %v. Error: %v", ethereumUrl, err.Error())
 		}
 		unsBuilder.SetContractBackend(backend)
+	} else {
+		unsBuilder.SetEthereumNetwork("mainnet")
+	}
+	if ethereumL2Url != "" {
+		backendL2, err := ethclient.Dial(ethereumL2Url)
+		if err != nil {
+			log.Fatalf("Error connecting to Ethereum L2 provider. Provider: %v. Error: %v", ethereumL2Url, err.Error())
+		}
+		unsBuilder.SetL2ContractBackend(backendL2)
+	} else {
+		unsBuilder.SetL2EthereumNetwork("polygon")
 	}
 	unsService, err := unsBuilder.Build()
 	if err != nil {
