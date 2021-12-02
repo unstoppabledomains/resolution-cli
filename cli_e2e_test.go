@@ -57,8 +57,9 @@ func TestCliCnsResolve(t *testing.T) {
       "crypto.ETH.address": "0x8aaD44321A86b170879d7A244c1e8d360c99DdA8",
       "gundb.public_key.value": "pqeBHabDQdCHhbdivgNEc74QO-x8CPGXq4PKWgfIzhY.7WJR5cZFuSyh1bFwx0GWzjmrim0T5Y6Bp0SSK0im3nI",
       "gundb.username.value": "0x8912623832e174f2eb1f59cc3b587444d619376ad5bf10070e937e0dc22b9ffb2e3ae059e6ebf729f87746b2f71e5d88ec99c1fb3c7c49b8617e2520d474c48e1c",
-      "ipfs.html.value": "QmdyBw5oTgCtTLQ18PbDvPL8iaLoEPhSyzD91q9XmgmAjb",
-      "ipfs.redirect_domain.value": "https://abbfe6z95qov3d40hf6j30g7auo7afhp.mypinata.cloud/ipfs/Qme54oEzRkgooJbCDr78vzKAWcv6DDEZqRhhDyDtzgrZP6"
+      "ipfs.html.value": "QmVHmG6BDRsDuzcFrWw6m5ByDnzcvfQbmdQF9bbSFTUeD1",
+      "ipfs.redirect_domain.value": "https://abbfe6z95qov3d40hf6j30g7auo7afhp.mypinata.cloud/ipfs/Qme54oEzRkgooJbCDr78vzKAWcv6DDEZqRhhDyDtzgrZP6",
+      "social.picture.value": "1/erc1155:0xc7e5e9434f4a71e6db978bd65b4d61d3593e5f27/14317"
    }
 }
 `
@@ -141,7 +142,7 @@ func TestCliCnsIpfsHash(t *testing.T) {
 	t.Parallel()
 	cmd := testcli.Command(commandPath(), "resolve", "ipfs-hash", "-d", "brad.crypto")
 	cmd.Run()
-	expectedOutput := `"QmdyBw5oTgCtTLQ18PbDvPL8iaLoEPhSyzD91q9XmgmAjb"
+	expectedOutput := `"QmVHmG6BDRsDuzcFrWw6m5ByDnzcvfQbmdQF9bbSFTUeD1"
 `
 	assertCommandResult(t, cmd, expectedOutput)
 }
@@ -203,6 +204,38 @@ func TestCliUnsRecords(t *testing.T) {
       "crypto.ETH.address": "0xDF178479385aF668E0f13AA81903A799F654366E"
    }
 }
+`
+	assertCommandResult(t, cmd, expectedOutput)
+}
+func TestCliUnsLocation(t *testing.T) {
+	t.Parallel()
+	cmd := testcli.Command(commandPath(), "resolve", "location", "-d", "brad.crypto")
+	cmd.Run()
+	expectedOutput := `{
+   "RegistryAddress": "0xD1E5b0FF1287aA9f9A268759062E4Ab08b9Dacbe",
+   "ResolverAddress": "0xb66DcE2DA6afAAa98F2013446dBCB0f4B0ab2842",
+   "NetworkId": 1,
+   "Blockchain": "ETH",
+   "OwnerAddress": "0x8aaD44321A86b170879d7A244c1e8d360c99DdA8",
+   "BlockchainProviderUrl": "https://mainnet.infura.io/v3/c5da69dfac9c4d9d96dd232580d4124e"
+}
+`
+	assertCommandResult(t, cmd, expectedOutput)
+}
+func TestCliUnsUnhash(t *testing.T) {
+	t.Parallel()
+	cmd := testcli.Command(commandPath(), "unhash", "0x756e4e998dbffd803c21d23b06cd855cdc7a4b57706c95964a37e24b47c10fc9")
+	cmd.Run()
+	expectedOutput := `"brad.crypto"
+`
+
+	assertCommandResult(t, cmd, expectedOutput)
+}
+func TestCliUnsUnhashTokenId(t *testing.T) {
+	t.Parallel()
+	cmd := testcli.Command(commandPath(), "unhash", "53115498937382692782103703677178119840631903773202805882273058578308100329417")
+	cmd.Run()
+	expectedOutput := `"brad.crypto"
 `
 	assertCommandResult(t, cmd, expectedOutput)
 }
