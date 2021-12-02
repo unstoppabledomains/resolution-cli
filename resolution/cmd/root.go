@@ -79,8 +79,9 @@ func init() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	resolveCmd.AddCommand(addrCmd, ipfsCmd, recordsCmd, httpUrlCmd, ownerCmd, resolverCmd, emailCmd, dnsCmd, addrVersionCmd)
+	resolveCmd.AddCommand(addrCmd, ipfsCmd, recordsCmd, httpUrlCmd, ownerCmd, resolverCmd, emailCmd, dnsCmd, addrVersionCmd, locationCmd)
 	rootCmd.AddCommand(resolveCmd)
+	rootCmd.AddCommand(unhashCmd)
 	rootCmd.AddCommand(namehashCmd)
 }
 
