@@ -195,6 +195,19 @@ func TestCliCnsRecords(t *testing.T) {
 `
 	assertCommandResult(t, cmd, expectedOutput)
 }
+
+func TestCliUnsL2Records(t *testing.T) {
+	t.Parallel()
+	cmd := testcli.Command(commandPath(), "resolve", "records", "crypto.ETH.address", "-d", "coincontroller.wallet")
+	cmd.Run()
+	expectedOutput := `{
+   "records": {
+      "crypto.ETH.address": ""
+   }
+}
+`
+	assertCommandResult(t, cmd, expectedOutput)
+}
 func TestCliUnsRecords(t *testing.T) {
 	t.Parallel()
 	cmd := testcli.Command(commandPath(), "resolve", "records", "crypto.ETH.address", "-d", "atomski.nft")
