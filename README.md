@@ -132,7 +132,7 @@ CLI provides JSON output or quoted string in case of single return value
 
 # Network support
 
-CLI supports Ethereum mainnet and Zilliqa mainnet only.
+CLI supports Ethereum, Polygon, and Zilliqa mainnet only.
 
 # Contributions
 
