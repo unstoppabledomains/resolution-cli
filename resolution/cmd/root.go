@@ -103,27 +103,26 @@ func initConfig() {
 func initNamingServices() {
 	var err error
 	ethereumUrl := viper.GetString(ethereumUrlKey)
-	ethereumL2Url := viper.GetString(ethereumL2ProviderUrlFlag)
+	ethereumL2Url := viper.GetString(ethereumL2UrlKey)
 	zilliqaUrl := viper.GetString(zilliqaUrlKey)
 	unsBuilder := resolution.NewUnsBuilder()
 	znsBuilder := resolution.NewZnsBuilder()
-	if ethereumUrl != "" {
+	if ethereumUrl != "" || ethereumL2Url != "" {
+		if ethereumUrl == "" || ethereumL2Url == "" {
+			log.Fatalf("Specify both L1 and L2 ethereum url when defining your own networks")
+		}
 		backend, err := ethclient.Dial(ethereumUrl)
 		if err != nil {
 			log.Fatalf("Error connecting to Ethereum provider. Provider: %v. Error: %v", ethereumUrl, err.Error())
 		}
-		unsBuilder.SetContractBackend(backend)
-	} else {
-		unsBuilder.SetEthereumNetwork("mainnet")
-	}
-	if ethereumL2Url != "" {
+		unsBuilder.SetContractBackend(backend).SetEthereumNetwork("mainnet")
 		backendL2, err := ethclient.Dial(ethereumL2Url)
 		if err != nil {
 			log.Fatalf("Error connecting to Ethereum L2 provider. Provider: %v. Error: %v", ethereumL2Url, err.Error())
 		}
-		unsBuilder.SetL2ContractBackend(backendL2)
+		unsBuilder.SetL2ContractBackend(backendL2).SetL2EthereumNetwork("polygon")
 	} else {
-		unsBuilder.SetL2EthereumNetwork("polygon")
+		unsBuilder.SetEthereumNetwork("mainnet").SetL2EthereumNetwork("polygon")
 	}
 	unsService, err := unsBuilder.Build()
 	if err != nil {

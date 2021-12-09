@@ -54,11 +54,13 @@ $ resolution --help
 
 ### Ethereum Provider
 
-UNS domains are resolved by reading from both the Ethereum mainnet and Polygon L2 network
+UNS domains are resolved by reading from both the Ethereum mainnet and Polygon L2 network.
+
+If L1 and L2 Ethereum JSON RPC are not defined, default Infura Ethereum Provider Urls for L1 and L2 will be used.
+
+NOTE: L1 and L2 networks must both be defined or none at all.
 
 #### L1
-
-If no Ethereum JSON RPC ethereum-provider-url is defined, a default Infura Ethereum Provider Url will be used
 
 Options for defining a ethereumProviderUrlFlag:
 
