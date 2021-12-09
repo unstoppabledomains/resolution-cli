@@ -15,6 +15,8 @@ import (
 
 const ethereumUrlKey = "ETHEREUM_PROVIDER_URL"
 const ethereumL2UrlKey = "ETHEREUM_L2_PROVIDER_URL"
+const ethereumNetworkIdKey = "ETHEREUM_NETWORK_ID"
+const ethereumL2NetworkIdKey = "ETHEREUM_L2_NETWORK_ID"
 const zilliqaUrlKey = "ZILLIQA_PROVIDER_URL"
 
 var Domain string
@@ -25,6 +27,8 @@ var SelectedNamingService resolution.NamingService
 
 var ethereumProviderUrlFlag string
 var ethereumL2ProviderUrlFlag string
+var ethereumNetworkIdFlag string
+var ethereumL2NetworkIdFlag string
 var zilliqaProviderUrlFlag string
 
 var (
@@ -67,6 +71,8 @@ func init() {
 	log.SetFlags(log.Flags() &^ (log.Ldate | log.Ltime))
 	rootCmd.PersistentFlags().StringVar(&ethereumProviderUrlFlag, "ethereum-provider-url", "", "Ethereum JSON RPC endpoint url (could be set via RESOLUTION_ETHEREUM_PROVIDER_URL environment variable)")
 	rootCmd.PersistentFlags().StringVar(&ethereumL2ProviderUrlFlag, "ethereum-l2-provider-url", "", "Ethereum L2 JSON RPC endpoint url (could be set via RESOLUTION_ETHEREUM_L2_PROVIDER_URL environment variable)")
+	rootCmd.PersistentFlags().StringVar(&ethereumNetworkIdFlag, "ethereum-network-id", "", "Ethereum network id (could be set via RESOLUTION_ETHEREUM_NETWORK_ID environment variable)")
+	rootCmd.PersistentFlags().StringVar(&ethereumL2NetworkIdFlag, "ethereum-l2-network-id", "", "Ethereum L2 network id (could be set via RESOLUTION_ETHEREUM_L2_NETWORK_ID environment variable)")
 	rootCmd.PersistentFlags().StringVar(&zilliqaProviderUrlFlag, "zilliqa-provider-url", "", "Zilliqa JSON RPC endpoint url (could be set via RESOLUTION_ZILLIQA_PROVIDER_URL environment variable)")
 	resolveCmd.PersistentFlags().StringVarP(&Domain, "domain", "d", "", ".crypto or .zil domain to resolve (required)")
 	namehashCmd.PersistentFlags().StringVarP(&Domain, "domain", "d", "", ".crypto or .zil domain to resolve (required)")
@@ -94,6 +100,12 @@ func initConfig() {
 	if ethereumL2ProviderUrlFlag != "" {
 		viper.Set(ethereumL2UrlKey, ethereumL2ProviderUrlFlag)
 	}
+	if ethereumNetworkIdFlag != "" {
+		viper.Set(ethereumNetworkIdKey, ethereumNetworkIdFlag)
+	}
+	if ethereumL2NetworkIdFlag != "" {
+		viper.Set(ethereumL2NetworkIdKey, ethereumL2NetworkIdFlag)
+	}
 	if zilliqaProviderUrlFlag != "" {
 		viper.Set(zilliqaUrlKey, zilliqaProviderUrlFlag)
 	}
@@ -104,6 +116,8 @@ func initNamingServices() {
 	var err error
 	ethereumUrl := viper.GetString(ethereumUrlKey)
 	ethereumL2Url := viper.GetString(ethereumL2UrlKey)
+	ethereumNetworkId := viper.GetString(ethereumNetworkIdKey)
+	ethereumL2NetworkId := viper.GetString(ethereumL2NetworkIdKey)
 	zilliqaUrl := viper.GetString(zilliqaUrlKey)
 	unsBuilder := resolution.NewUnsBuilder()
 	znsBuilder := resolution.NewZnsBuilder()
@@ -111,16 +125,22 @@ func initNamingServices() {
 		if ethereumUrl == "" || ethereumL2Url == "" {
 			log.Fatalf("Specify both L1 and L2 ethereum url when defining your own networks")
 		}
+		if ethereumNetworkId != "mainnet" && ethereumNetworkId != "rinkeby" {
+			log.Fatalf("Specify ethereum network id ('mainnet' or 'rinkeby')")
+		}
+		if ethereumL2NetworkId != "polygon" && ethereumL2NetworkId != "mumbai" {
+			log.Fatalf("Specify ethereum L2 network id ('polygon' or 'mumbai')")
+		}
 		backend, err := ethclient.Dial(ethereumUrl)
 		if err != nil {
 			log.Fatalf("Error connecting to Ethereum provider. Provider: %v. Error: %v", ethereumUrl, err.Error())
 		}
-		unsBuilder.SetContractBackend(backend).SetEthereumNetwork("mainnet")
+		unsBuilder.SetContractBackend(backend).SetEthereumNetwork(ethereumNetworkId)
 		backendL2, err := ethclient.Dial(ethereumL2Url)
 		if err != nil {
 			log.Fatalf("Error connecting to Ethereum L2 provider. Provider: %v. Error: %v", ethereumL2Url, err.Error())
 		}
-		unsBuilder.SetL2ContractBackend(backendL2).SetL2EthereumNetwork("polygon")
+		unsBuilder.SetL2ContractBackend(backendL2).SetL2EthereumNetwork(ethereumL2NetworkId)
 	} else {
 		unsBuilder.SetEthereumNetwork("mainnet").SetL2EthereumNetwork("polygon")
 	}
