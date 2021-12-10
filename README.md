@@ -62,25 +62,25 @@ NOTE: L1 and L2 networks must both be defined or none at all.
 
 #### L1
 
-Options for defining a ethereumProviderUrlFlag:
+Options for defining a custom Ethereum provider:
 
-- `ETHEREUM_PROVIDER_URL` env variable
+- `RESOLUTION_ETHEREUM_PROVIDER_URL` env variable to specify the provider URL
+- `RESOLUTION_ETHEREUM_NETWORK_ID` env variable to specify the network type (mainnet or rinkeby)
+- `--ethereum-provider-url` flag to specify the provider URL
+- `--ethereum-network-id` flag to specify the network type (mainnet or rinkeby)
 
-- `--ethereum-provider-url` flag
-
-The CLI prioritizes the `--ethereum-provider-url` flag
+The CLI prioritizes the `--ethereum-provider-url` and `--ethereum-network-id` flags
 
 #### L2
 
-If no Ethereum L2 JSON RPC ethereum-provider-url is defined, a default Infura Ethereum L2 Provider Url will be used
+Options for defining a custom Polygon L2 provider:
 
-Options for defining a ethereumL2ProviderUrlFlag:
+- `RESOLUTION_ETHEREUM_L2_PROVIDER_URL` env variable to specify the provider URL
+- `RESOLUTION_ETHEREUM_L2_NETWORK_ID` env variable to specify the network type (polygon or matic)
+- `--ethereum-l2-provider-url` flag to specify the provider URL
+- `--ethereum-l2-network-id` flag to specify the network type (polygon or matic)
 
-- `ETHEREUM_L2_PROVIDER_URL` env variable
-
-- `--ethereum-l2-provider-url` flag
-
-The CLI prioritizes the `--ethereum-l2-provider-url` flag
+The CLI prioritizes the `--ethereum-l2-provider-url` and `--ethereum-l2-network-id` flags
 
 ### Zilliqa Provider
 
