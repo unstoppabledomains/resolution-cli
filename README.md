@@ -36,20 +36,20 @@ resolution-cli supports decentralized domains across two zones:
 ## Installation using go
 
 ```shell
-$ go get -u github.com/unstoppabledomains/resolution-cli/resolution
+go get -u github.com/unstoppabledomains/resolution-cli/resolution
 ```
 
 ### Build and install from sources
 
 ```shell
-$ go build -o ./cli ./resolution
-$ mv ./cli /usr/local/bin/resolution
+go build -o ./cli ./resolution
+mv ./cli /usr/local/bin/resolution
 ```
 
 ## Run
 
 ```shell
-$ resolution --help
+resolution --help
 ```
 
 ### Ethereum Provider
@@ -101,7 +101,7 @@ The CLI prioritizes the `--zilliqa-provider-url` flag
 Resolve single address from ticker symbol
 
 ```shell
-$ resolution resolve addr ETH -d brad.crypto
+resolution resolve addr ETH -d brad.crypto
 ```
 
 ## IPFS
@@ -109,7 +109,7 @@ $ resolution resolve addr ETH -d brad.crypto
 Resolve ipfs hash
 
 ```shell
-$ resolution resolve ipfs-hash -d brad.zil
+resolution resolve ipfs-hash -d brad.zil
 ```
 
 ## All
@@ -117,7 +117,7 @@ $ resolution resolve ipfs-hash -d brad.zil
 Resolve all known records
 
 ```shell
-$ resolution resolve -d brad.zil
+resolution resolve -d brad.zil
 ```
 
 ## Raw records
@@ -125,7 +125,7 @@ $ resolution resolve -d brad.zil
 Resolve records from exact record keys. See supported records reference [here](https://docs.unstoppabledomains.com/domain-registry-essentials/records-reference)
 
 ```shell
-$ resolution resolve records crypto.ETH.adddress crypto.BTC.address -d brad.crypto
+resolution resolve records crypto.ETH.adddress crypto.BTC.address -d brad.crypto
 ```
 
 # Output format
@@ -145,13 +145,13 @@ Contributions are more than welcome. The easiest way to contribute is through Gi
 ## Run end-to-end tests
 
 ```shell
-$ bash run-e2e-test.sh
+bash run-e2e-test.sh
 ```
 
 ## Build binaries for Windows, MacOS and Linux
 
 ```shell
-$ bash build-binaries.sh
+bash build-binaries.sh
 ```
 
 Find the binaries in `./build` directory
