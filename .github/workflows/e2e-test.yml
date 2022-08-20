@@ -33,3 +33,4 @@ jobs:
         run: go build -o ./test-cli ./resolution
       - name: End-to-end test
         run: go test
+[![End to end tests](https://github.com/unstoppabledomains/resolution-cli/actions/workflows/e2e-test.yml/badge.svg?branch=enable-uns)](https://github.com/unstoppabledomains/resolution-cli/actions/workflows/e2e-test.yml)
